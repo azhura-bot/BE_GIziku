@@ -1,0 +1,1 @@
+from UserApp.views.auth_user import Login, Register
