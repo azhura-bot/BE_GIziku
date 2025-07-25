@@ -6,6 +6,9 @@ class Food(models.Model):
     photo_food = models.ImageField(upload_to='images/food/', null=True, blank=True)
     category = models.CharField(max_length=100)
     price = models.IntegerField()
+    nutrition = models.IntegerField()
+    cook_time = models.IntegerField()
+    preparation_time = models.IntegerField()
     instruction = models.TextField()
     ingridients = models.TextField()
 

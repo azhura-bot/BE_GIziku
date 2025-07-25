@@ -5,7 +5,6 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from .models import Food
 from .serializers import FoodSerializer
-import os
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
@@ -15,10 +14,7 @@ def food_list_create(request):
         serializer = FoodSerializer(foods, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        data = request.data.copy()
-        if 'photo_food' in request.FILES:
-            data['photo_food'] = request.FILES['photo_food']
-        serializer = FoodSerializer(data=data)
+        serializer = FoodSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -39,15 +35,7 @@ def food_detail_delete(request, pk):
 @permission_classes([IsAuthenticated])
 def food_update(request, pk):
     food = get_object_or_404(Food, pk=pk)
-    data = request.data.copy()
-    if 'photo_food' in request.FILES:
-        # Hapus file lama jika ada
-        if food.photo_food:
-            old_path = food.photo_food.path
-            if os.path.exists(old_path):
-                os.remove(old_path)
-        data['photo_food'] = request.FILES['photo_food']
-    serializer = FoodSerializer(food, data=data)
+    serializer = FoodSerializer(food, data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)

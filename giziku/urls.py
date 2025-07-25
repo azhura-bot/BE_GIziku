@@ -23,4 +23,6 @@ urlpatterns = [
     path('api/profile/', include('ProfileApp.urls')),
     path('api/', include('GiziApp.urls')),
     path('api/', include('FoodApp.urls')),
+    path('api/', include('ShopApp.urls')),
+    path('api/', include('ChatbotApp.urls')),
 ]
