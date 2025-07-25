@@ -33,12 +33,8 @@ class UserSerializer(serializers.ModelSerializer):
         return value
 
     def validate_role(self, value):
-        valid_roles = ['admin', 'user']
+        valid_roles = ['penjual', 'user']
         if value not in valid_roles:
             raise serializers.ValidationError(f"Role must be one of: {valid_roles}")
         return value
     
-    def validate(self, data):
-        if data.get('role') == 'admin' and not data.get('email').endswith('@company.com'):
-            raise serializers.ValidationError("Admin must use company email")
-        return data

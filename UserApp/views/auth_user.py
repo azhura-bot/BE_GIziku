@@ -80,6 +80,7 @@ def Register(request):
             name = user_request.get('name')
             email = user_request.get('email')
             password = user_request.get('password')
+            role = user_request.get('role', 'user')  # Default role is 'user'
             
             # Validasi input
             if not name or not email or not password:
@@ -99,7 +100,8 @@ def Register(request):
             user_data = {
                 'name': name,
                 'email': email,
-                'password': password
+                'password': password,
+                'role': role
             }
             
             user_serializer = UserSerializer(data=user_data)
@@ -109,7 +111,8 @@ def Register(request):
                     'message': 'User registered successfully',
                     'data': {
                         'name': name,
-                        'email': email
+                        'email': email,
+                        'role': role
                     },
                     'status': 201
                 }, safe=False)

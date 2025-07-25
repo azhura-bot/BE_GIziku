@@ -8,7 +8,7 @@ from rest_framework import status
 from .models import ChatSession, ChatMessage
 
 genai.configure(api_key=settings.GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-2.0-flash')
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

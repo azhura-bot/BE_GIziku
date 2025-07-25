@@ -7,6 +7,7 @@ from GiziApp.models import Gizi
 from FoodApp.models import Food
 from .models import Recc
 from .serializers import ReccSerializer
+from GiziApp.serializers import GiziSerializer
 
 # Create your views here.
 
@@ -58,3 +59,21 @@ def create_recommendation(request):
         'simulasi_id': gizi.id,
         'rekomendasi': recc_serializer.data
     }, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_recommendation(request, simulasi_id):
+    try:
+        gizi = Gizi.objects.get(id=simulasi_id, user=request.user)
+    except Gizi.DoesNotExist:
+        return Response({'message': 'Simulasi tidak ditemukan'}, status=status.HTTP_404_NOT_FOUND)
+
+    reccs = Recc.objects.filter(simulasi=gizi)
+    recc_serializer = ReccSerializer(reccs, many=True)
+    gizi_serializer = GiziSerializer(gizi)
+    return Response({
+        'message': 'Rekomendasi ditemukan',
+        'simulasi_id': gizi.id,
+        'gizi': gizi_serializer.data,
+        'rekomendasi': recc_serializer.data
+    }, status=status.HTTP_200_OK)

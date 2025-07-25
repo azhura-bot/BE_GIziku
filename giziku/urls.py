@@ -25,4 +25,5 @@ urlpatterns = [
     path('api/', include('FoodApp.urls')),
     path('api/', include('ShopApp.urls')),
     path('api/', include('ChatbotApp.urls')),
+    path('api/', include('ReccApp.urls')),
 ]

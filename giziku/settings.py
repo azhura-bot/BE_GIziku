@@ -151,5 +151,5 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'UserApp.User'
-
-GEMINI_API_KEY = os.environ.get('AIzaSyBj3BMnKvPERyz5SZYHNgzQWzocABGLjwU')
+GEMINI_API_KEY = 'AIzaSyBj3BMnKvPERyz5SZYHNgzQWzocABGLjwU'
+ALLOWED_HOSTS = ['*']

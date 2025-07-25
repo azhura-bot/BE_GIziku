@@ -13,7 +13,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=False, blank=False)
     password = models.CharField(max_length=255, null=False, blank=False)
     ROLE_CHOICES = (
-        ('admin', 'admin'),
+        ('penjual', 'penjual'),
         ('user', 'user'),
     )
     role = models.CharField(

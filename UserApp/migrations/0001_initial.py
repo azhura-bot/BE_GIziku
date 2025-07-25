@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255)),
                 ('email', models.EmailField(max_length=254, unique=True)),
                 ('password', models.CharField(max_length=255)),
-                ('role', models.CharField(choices=[('admin', 'admin'), ('user', 'user')], default='user', max_length=10)),
+                ('role', models.CharField(choices=[('penjual', 'penjual'), ('user', 'user')], default='user', max_length=10)),
                 ('phone', models.CharField(blank=True, max_length=20, null=True)),
                 ('photo_profile', models.ImageField(blank=True, null=True, upload_to='iamges/profile_photos/')),
                 ('address', models.TextField(blank=True, null=True)),
